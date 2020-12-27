@@ -1,0 +1,38 @@
+
+org.apache.lucene.index
+Class IndexWriter.DocStats
+
+    java.lang.Object
+        org.apache.lucene.index.IndexWriter.DocStats
+
+    Enclosing class:
+        IndexWriter
+
+
+    public static final class IndexWriter.DocStats
+    extends Object
+
+    DocStats for this index
+
+        Field Summary
+        Fields Modifier and Type 	Field and Description
+        int 	maxDoc
+        The total number of docs in this index, including docs not yet flushed (still in the RAM buffer), not counting deletions.
+        int 	numDocs
+        The total number of docs in this index, including docs not yet flushed (still in the RAM buffer), and including deletions.
+        Method Summary
+            Methods inherited from class java.lang.Object
+            clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait
+
+        Field Detail
+            maxDoc
+
+            public final int maxDoc
+
+            The total number of docs in this index, including docs not yet flushed (still in the RAM buffer), not counting deletions.
+            numDocs
+
+            public final int numDocs
+
+            The total number of docs in this index, including docs not yet flushed (still in the RAM buffer), and including deletions. NOTE: buffered deletions are not counted. If you really need these to be counted you should call IndexWriter.commit() first.
+
