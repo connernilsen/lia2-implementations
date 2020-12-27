@@ -1,4 +1,4 @@
-package MeetLucene;
+package buildSearchIndex;
 
 import java.io.File;
 import java.io.FileFilter;
