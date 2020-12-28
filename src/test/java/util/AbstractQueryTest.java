@@ -43,7 +43,8 @@ public abstract class AbstractQueryTest {
 
   @BeforeAll
   public static void setup() throws Exception {
-    testPrefs = new TestPrefs();
+    System.out.println("Setting up for abstract query tests");
+    setupDir();
     IndexWriter writer = new IndexWriter(testPrefs.dir, new IndexWriterConfig(new StandardAnalyzer()));
 
     List<File> files = findFiles(new File(dataDir));
@@ -54,6 +55,10 @@ public abstract class AbstractQueryTest {
 
     writer.close();
     searcher = new IndexSearcher(DirectoryReader.open(testPrefs.dir));
+  }
+
+  public static void setupDir() throws Exception {
+    testPrefs = new TestPrefs();
   }
 
   private static Document getDoc(File file) throws IOException {
@@ -130,18 +135,23 @@ public abstract class AbstractQueryTest {
 
   @AfterAll
   public static void teardown() throws IOException {
-    testPrefs.dir.close();
-    if (testPrefs.dirPointer == null || !testPrefs.dirPointer.exists()) {
+    System.out.println("Tearing down abstract query tests");
+    teardown(testPrefs);
+  }
+
+  public static void teardown(TestPrefs prefs) throws IOException {
+    prefs.dir.close();
+    if (prefs.dirPointer == null || !prefs.dirPointer.exists()) {
       return;
     }
     String[] entries;
-    if ((entries = testPrefs.dirPointer.list()) != null) {
+    if ((entries = prefs.dirPointer.list()) != null) {
       for (String s : entries) {
-        File curr = new File(testPrefs.dirPointer.getPath(), s);
+        File curr = new File(prefs.dirPointer.getPath(), s);
         curr.delete();
       }
     }
-    testPrefs.dirPointer.delete();
+    prefs.dirPointer.delete();
   }
 
   protected static boolean hitsIncludeTitle(IndexSearcher searcher, TopDocs hits, String title)
@@ -230,7 +240,7 @@ public abstract class AbstractQueryTest {
     }
 
     public void tearDown() throws IOException {
-      dir.close();
+      AbstractQueryTest.teardown(this);
     }
   }
 }
