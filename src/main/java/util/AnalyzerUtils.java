@@ -2,7 +2,6 @@ package util;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Arrays;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
@@ -19,7 +18,7 @@ public class AnalyzerUtils {
     CharTermAttribute term = stream.addAttribute(CharTermAttribute.class);
     stream.reset();
     while (stream.incrementToken()) {
-      System.out.print(String.copyValueOf(term.buffer()));
+      System.out.print("[" + String.copyValueOf(term.buffer()) + "] ");
     }
     stream.close();
   }

@@ -1,4 +1,4 @@
-package analyzers;
+package analyzers.metaphone;
 
 import java.io.IOException;
 import org.apache.commons.codec.language.Metaphone;
@@ -21,7 +21,7 @@ public class MetaphoneReplacementFilter extends TokenFilter {
   }
 
   @Override
-  public boolean incrementToken() throws IOException {
+  public final boolean incrementToken() throws IOException {
     if (!input.incrementToken()) {
       return false;
     }
@@ -32,7 +32,7 @@ public class MetaphoneReplacementFilter extends TokenFilter {
     return true;
   }
 
-  private void overwrite(char[] buff, String value) {
+  public static void overwrite(char[] buff, String value) {
     for (int i = 0; i < buff.length; i++) {
       if (i < value.length()) {
         buff[i] = value.charAt(i);

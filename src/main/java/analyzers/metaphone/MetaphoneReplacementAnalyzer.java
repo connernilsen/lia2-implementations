@@ -1,4 +1,4 @@
-package analyzers;
+package analyzers.metaphone;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -8,7 +8,6 @@ import org.apache.lucene.analysis.core.LetterTokenizer;
 import util.AnalyzerUtils;
 
 public class MetaphoneReplacementAnalyzer extends Analyzer {
-  private String fieldName;
 
   @Override
   protected TokenStreamComponents createComponents(String s) {
