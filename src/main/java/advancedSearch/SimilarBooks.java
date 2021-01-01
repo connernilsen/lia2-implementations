@@ -15,9 +15,7 @@ import org.apache.lucene.search.BoostQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.BytesRef;
-import org.apache.lucene.util.BytesRefIterator;
 import util.AnalyzerUtils;
 
 public class SimilarBooks {
@@ -70,10 +68,9 @@ public class SimilarBooks {
 
     BooleanQuery.Builder subjectQuery = new Builder();
     TermsEnum iter = vec.iterator();
-    for (BytesRef ref = iter.next(); ref != null;) {
+    for (BytesRef ref = iter.next(); ref != null; ref = iter.next()) {
       TermQuery tq = new TermQuery(new Term("subject", ref));
       subjectQuery.add(tq, Occur.SHOULD);
-      ref = iter.next();
     }
 
     BooleanQuery.Builder likeThisQuery = new Builder();
