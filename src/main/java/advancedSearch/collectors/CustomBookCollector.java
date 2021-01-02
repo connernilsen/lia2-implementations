@@ -1,4 +1,4 @@
-package advancedSearch;
+package advancedSearch.collectors;
 
 import java.io.IOException;
 import java.util.AbstractMap;

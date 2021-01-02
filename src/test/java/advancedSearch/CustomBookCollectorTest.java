@@ -2,10 +2,11 @@ package advancedSearch;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import advancedSearch.collectors.AllDocsCollector;
+import advancedSearch.collectors.CustomBookCollector;
 import java.util.List;
 import java.util.Map;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.junit.jupiter.api.Test;
