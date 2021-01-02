@@ -3,7 +3,9 @@ package advancedSearch;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.lucene.index.DocValues;
 import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.index.NumericDocValues;
 import org.apache.lucene.index.TermsEnum;
 import org.apache.lucene.search.FieldComparator;
 import org.apache.lucene.search.FieldComparatorSource;
@@ -63,22 +65,18 @@ public class DistanceComparatorSource extends FieldComparatorSource {
     @Override
     public LeafFieldComparator getLeafComparator(LeafReaderContext leafReaderContext)
         throws IOException {
-      TermsEnum terms = leafReaderContext.reader().terms("location").iterator();
-      for (BytesRef termVal = terms.next(); termVal != null; termVal = terms.next()) {
-        String[] term = termVal.utf8ToString().split(",");
-        try {
-          // :( this is disgusting but I'm really struggling to figure out clean access to stored
-          // fields without document id
-          int pos = (int) terms.termState().getClass()
-              .getField(terms.termState().getClass().getFields()[5].getName())
-              .get(terms.termState());
-          xDoc[pos] = Long.parseLong(term[0]);
-          yDoc[pos] = Long.parseLong(term[1]);
-        }
-        catch (NoSuchFieldException | IllegalAccessException e) {
-          throw new IllegalStateException(e);
-        }
+      NumericDocValues xValues = DocValues.getNumeric(leafReaderContext.reader(), "locX");
+      NumericDocValues yValues = DocValues.getNumeric(leafReaderContext.reader(), "locY");
+      for (int xPos = xValues.nextDoc(); xPos != NumericDocValues.NO_MORE_DOCS;
+          xPos = xValues.nextDoc()) {
+        xDoc[xPos] = xValues.longValue();
       }
+
+      for (int yPos = yValues.nextDoc(); yPos != NumericDocValues.NO_MORE_DOCS;
+          yPos = yValues.nextDoc()) {
+        yDoc[yPos] = yValues.longValue();
+      }
+
       return new ScoreDocLeafComparator();
     }
 
