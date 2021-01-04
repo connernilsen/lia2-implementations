@@ -1,4 +1,4 @@
-package tika;
+package extensions.tika;
 
 import java.io.FileInputStream;
 import java.io.IOException;

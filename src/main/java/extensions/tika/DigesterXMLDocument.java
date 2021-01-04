@@ -1,10 +1,9 @@
-package tika;
+package extensions.tika;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.print.Doc;
 import org.apache.commons.digester3.Digester;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;

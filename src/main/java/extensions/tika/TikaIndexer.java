@@ -1,14 +1,12 @@
-package tika;
+package extensions.tika;
 
 import buildSearchIndex.CreateIndex;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;

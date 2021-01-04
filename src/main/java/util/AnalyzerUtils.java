@@ -33,6 +33,7 @@ import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.DocValuesType;
+import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.search.IndexSearcher;
@@ -125,6 +126,8 @@ public class AnalyzerUtils {
     FieldType titleType = new FieldType(TextField.TYPE_STORED);
     titleType.setStoreTermVectors(true);
     titleType.setStoreTermVectorOffsets(true);
+    titleType.setStoreTermVectorPositions(true);
+    titleType.setStoreTermVectorPayloads(true);
     doc.add(new Field("title", title, titleType));
     doc.add(new BinaryDocValuesField("title", new BytesRef(title)));
     FieldType title2Type = new FieldType(StringField.TYPE_STORED);
