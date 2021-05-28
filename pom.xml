@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>lucene_test</artifactId>
+  <artifactId>lia2-implementations</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
